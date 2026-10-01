@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" font-family="'Segoe UI', Arial, sans-serif" role="img" aria-label="Animated data engineering pipeline across seven stages">
+  <defs>
+    <linearGradient id="pipe" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6d5efc"/><stop offset="0.5" stop-color="#2f9fe0"/><stop offset="1" stop-color="#17b890"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0e1626"/><stop offset="1" stop-color="#101e2e"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#17b890" stop-opacity=".25"/><stop offset="1" stop-color="#17b890" stop-opacity="0"/></radialGradient>
+    <style>
+      .stage { font-size:12.5px; font-weight:800; fill:#fff; }
+      .combo { font-size:10.5px; fill:#c7d2e0; }
+      .num { font-size:11px; font-weight:800; fill:#0e1626; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="440" rx="16" fill="url(#bg)"/>
+  <circle cx="200" cy="120" r="200" fill="url(#orb)"/>
+  <circle cx="1000" cy="340" r="220" fill="url(#orb)"/>
+
+  <text x="40" y="52" font-size="26" font-weight="800" fill="#ffffff">The Data Engineering Pipeline</text>
+  <text x="40" y="78" font-size="14" fill="#8ea3b8">Data flows left → right. Each stage pairs tools that solve one job together.</text>
+
+  <!-- the pipe -->
+  <rect x="60" y="150" width="1080" height="14" rx="7" fill="url(#pipe)" opacity="0.9"/>
+
+  <!-- animated flowing data packets along the pipe -->
+  <g>
+    <circle r="6" fill="#ffffff">
+      <animate attributeName="cx" from="60" to="1140" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="157;157" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="5" fill="#9ff0d6">
+      <animate attributeName="cx" from="60" to="1140" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="157;157" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="5" fill="#b9c6ff">
+      <animate attributeName="cx" from="60" to="1140" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="157;157" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- 7 stage nodes with pulsing glow + tool combos -->
+  <!-- helper positions: x = 110,257,404,551,698,845,992 ... use 7 across -->
+  <g>
+    <!-- Stage 1: Ingestion -->
+    <circle cx="130" cy="157" r="26" fill="#6d5efc"><animate attributeName="r" values="26;30;26" dur="2.4s" repeatCount="indefinite"/></circle>
+    <text x="130" y="161" text-anchor="middle" class="num">1</text>
+    <text x="130" y="210" text-anchor="middle" class="stage">Ingestion</text>
+    <text x="130" y="230" text-anchor="middle" class="combo">Kafka + Debezium</text>
+    <text x="130" y="246" text-anchor="middle" class="combo">Kafka + Flink</text>
+    <text x="130" y="262" text-anchor="middle" class="combo">Airbyte + dbt</text>
+
+    <!-- Stage 2: Transformation -->
+    <circle cx="298" cy="157" r="26" fill="#5a86f5"><animate attributeName="r" values="26;30;26" dur="2.4s" begin="0.3s" repeatCount="indefinite"/></circle>
+    <text x="298" y="161" text-anchor="middle" class="num">2</text>
+    <text x="298" y="210" text-anchor="middle" class="stage">Transformation</text>
+    <text x="298" y="230" text-anchor="middle" class="combo">Python + Pandas</text>
+    <text x="298" y="246" text-anchor="middle" class="combo">Python + PySpark</text>
+    <text x="298" y="262" text-anchor="middle" class="combo">SQL + dbt</text>
+
+    <!-- Stage 3: Orchestration -->
+    <circle cx="466" cy="157" r="26" fill="#3f9ae8"><animate attributeName="r" values="26;30;26" dur="2.4s" begin="0.6s" repeatCount="indefinite"/></circle>
+    <text x="466" y="161" text-anchor="middle" class="num">3</text>
+    <text x="466" y="210" text-anchor="middle" class="stage">Orchestration</text>
+    <text x="466" y="230" text-anchor="middle" class="combo">Airflow + Python</text>
+    <text x="466" y="246" text-anchor="middle" class="combo">Docker + Airflow</text>
+
+    <!-- Stage 4: Storage / Lakehouse -->
+    <circle cx="634" cy="157" r="26" fill="#2f9fe0"><animate attributeName="r" values="26;30;26" dur="2.4s" begin="0.9s" repeatCount="indefinite"/></circle>
+    <text x="634" y="161" text-anchor="middle" class="num">4</text>
+    <text x="634" y="210" text-anchor="middle" class="stage">Storage · Lakehouse</text>
+    <text x="634" y="230" text-anchor="middle" class="combo">S3 + Iceberg</text>
+    <text x="634" y="246" text-anchor="middle" class="combo">Spark + Iceberg</text>
+    <text x="634" y="262" text-anchor="middle" class="combo">Snowflake + dbt</text>
+    <text x="634" y="278" text-anchor="middle" class="combo">Databricks + Delta Lake</text>
+
+    <!-- Stage 5: Quality -->
+    <circle cx="802" cy="157" r="26" fill="#1fb6a6"><animate attributeName="r" values="26;30;26" dur="2.4s" begin="1.2s" repeatCount="indefinite"/></circle>
+    <text x="802" y="161" text-anchor="middle" class="num">5</text>
+    <text x="802" y="210" text-anchor="middle" class="stage">Quality · Lineage</text>
+    <text x="802" y="230" text-anchor="middle" class="combo">Great Expectations + Python</text>
+    <text x="802" y="246" text-anchor="middle" class="combo">DataHub + OpenLineage</text>
+
+    <!-- Stage 6: Deploy -->
+    <circle cx="970" cy="157" r="26" fill="#17b890"><animate attributeName="r" values="26;30;26" dur="2.4s" begin="1.5s" repeatCount="indefinite"/></circle>
+    <text x="970" y="161" text-anchor="middle" class="num">6</text>
+    <text x="970" y="210" text-anchor="middle" class="stage">Deploy · IaC</text>
+    <text x="970" y="230" text-anchor="middle" class="combo">Terraform + Cloud</text>
+    <text x="970" y="246" text-anchor="middle" class="combo">Git + CI/CD</text>
+
+    <!-- Stage 7: Observability -->
+    <circle cx="1110" cy="157" r="26" fill="#13a07f"><animate attributeName="r" values="26;30;26" dur="2.4s" begin="1.8s" repeatCount="indefinite"/></circle>
+    <text x="1110" y="161" text-anchor="middle" class="num">7</text>
+    <text x="1110" y="210" text-anchor="middle" class="stage">Observability</text>
+    <text x="1110" y="230" text-anchor="middle" class="combo">Grafana + Prometheus</text>
+  </g>
+
+  <text x="600" y="420" text-anchor="middle" font-size="12" fill="#6f8299" font-style="italic">Learn the problem each pair solves and how data moves between stages — that's real data engineering.  ·  by eswaran-hariharan</text>
+</svg>
