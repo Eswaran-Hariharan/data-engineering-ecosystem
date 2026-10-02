@@ -108,6 +108,59 @@ You can't operate what you can't see. Observability tells you whether pipelines 
 
 ---
 
+## Architecture patterns — how it all fits together
+
+The seven stages describe *what* happens. **Architecture patterns** describe *how you arrange* batch and streaming processing into a working system. Four show up again and again:
+
+![Lambda, Kappa, Delta and Medallion architectures compared](architectures.svg)
+
+### λ Lambda — batch + speed, merged
+
+Runs **two parallel paths**: a **batch layer** (slow but accurate, reprocesses all data) and a **speed layer** (fast, approximate, handles live data). A **serving layer** merges both so queries see complete, up-to-date results.
+
+- **Good:** robust and accurate, with real-time freshness.
+- **Pain:** you maintain **two codebases** (batch *and* streaming) for the same logic — easy to drift out of sync.
+- **Use when:** you need both historical accuracy and low-latency views, and can afford the dual complexity.
+
+### κ Kappa — streaming only
+
+Drops the batch layer entirely. **Everything is a stream** (e.g. Kafka + Flink). To reprocess history, you **replay the event log** through the same code.
+
+- **Good:** one codebase, real-time by default, simpler than Lambda.
+- **Pain:** reprocessing large history means replaying the whole stream; needs durable, replayable logs.
+- **Use when:** your workload is naturally event-driven and streaming-first.
+
+### Δ Delta / Lakehouse — one reliable table for both
+
+Instead of separate batch and speed systems, both **read and write the same table format** — **Delta Lake** or **Apache Iceberg** — which adds **ACID transactions, time travel, and schema enforcement** on top of cheap object storage (S3).
+
+- **Good:** warehouse-grade reliability on a data lake; batch and streaming share one source of truth — no dual systems.
+- **Use when:** you want a modern lakehouse (Databricks + Delta Lake, or open Iceberg) serving BI, SQL, and ML from one place.
+
+### 🥇 Medallion — refine data in layers
+
+Not an alternative to the others — a **data-quality layout** you apply *inside* a lakehouse. Data flows through three tiers:
+
+- **🥉 Bronze (Raw):** ingested exactly as received, append-only history.
+- **🥈 Silver (Cleaned):** validated, deduplicated, conformed, and joined.
+- **🥇 Gold (Curated):** business-level aggregates ready for dashboards and models.
+
+- **Good:** quality improves at each hop; clear separation of raw vs trusted vs business data.
+- **Use when:** building on Delta/Iceberg and you want a disciplined, debuggable refinement flow.
+
+### Which one?
+
+| Pattern | Shape | Best for | Main trade-off |
+|---------|-------|----------|----------------|
+| **Lambda** | Batch + speed layers merged | Accuracy *and* low latency | Two codebases to maintain |
+| **Kappa** | Single streaming path | Event-driven, real-time systems | Reprocessing = replay the stream |
+| **Delta / Lakehouse** | One ACID table, batch + stream | Modern unified lakehouse | Commit to a table format |
+| **Medallion** | Bronze → Silver → Gold layers | Organizing quality in a lakehouse | A layout, not a full architecture |
+
+> **How they relate:** Lambda and Kappa answer *"batch, stream, or both?"*. Delta/Lakehouse answers *"what do we store it in?"* — and **Medallion** is how you **organize** that lakehouse into raw → clean → curated. Many modern platforms are **Kappa-ish ingestion + a Delta/Iceberg lakehouse laid out in Medallion tiers.**
+
+---
+
 ## The full combinations reference
 
 | Combination | Stage | What it enables |

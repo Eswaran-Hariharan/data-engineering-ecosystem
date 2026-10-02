@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" font-family="'Segoe UI', Arial, sans-serif" role="img" aria-label="Comparison of Lambda, Kappa, Delta and Medallion data architectures">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#8aa0b6"/></marker>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0b1a2a" flood-opacity="0.35"/></filter>
+    <style>
+      .ptitle{font-size:17px;font-weight:800}
+      .ptag{font-size:11px;font-weight:700;fill:#5a6b7b}
+      .box{font-size:11.5px;font-weight:600;fill:#15233a}
+      .boxs{font-size:9.5px;fill:#3f5168}
+      .note{font-size:10.5px;fill:#5a6b7b}
+      .edge{stroke:#8aa0b6;stroke-width:1.8;fill:none}
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" rx="16" fill="#f4f7fb"/>
+  <text x="34" y="44" font-size="24" font-weight="800" fill="#15233a">Data Architecture Patterns, Compared</text>
+  <text x="34" y="68" font-size="13.5" fill="#5a6b7b">How batch, streaming, and lakehouse ideas are arranged — Lambda · Kappa · Delta · Medallion.</text>
+
+  <!-- ===================== LAMBDA (top-left) ===================== -->
+  <rect x="34" y="90" width="560" height="280" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+  <rect x="34" y="90" width="560" height="6" rx="3" fill="#ec7211"/>
+  <text x="54" y="124" class="ptitle" fill="#c75e0e">λ  Lambda</text>
+  <text x="150" y="124" class="ptag">Two paths: batch + speed, merged at serving</text>
+
+  <rect x="54" y="210" width="96" height="44" rx="8" fill="#eef2f7" stroke="#cfd8e2"/><text x="102" y="236" text-anchor="middle" class="box">Source</text>
+  <!-- batch layer -->
+  <rect x="200" y="150" width="150" height="44" rx="8" fill="#fde8d4" stroke="#ec7211"/><text x="275" y="170" text-anchor="middle" class="box">Batch layer</text><text x="275" y="186" text-anchor="middle" class="boxs">accurate, slow</text>
+  <!-- speed layer -->
+  <rect x="200" y="270" width="150" height="44" rx="8" fill="#fde8d4" stroke="#ec7211"/><text x="275" y="290" text-anchor="middle" class="box">Speed layer</text><text x="275" y="306" text-anchor="middle" class="boxs">fast, approximate</text>
+  <!-- serving -->
+  <rect x="400" y="210" width="150" height="44" rx="8" fill="#ffd9b3" stroke="#c75e0e"/><text x="475" y="236" text-anchor="middle" class="box">Serving layer</text>
+  <g class="edge">
+    <path d="M150,224 C175,224 175,172 200,172" marker-end="url(#ar)"/>
+    <path d="M150,236 C175,236 175,292 200,292" marker-end="url(#ar)"/>
+    <path d="M350,172 C375,172 375,224 400,224" marker-end="url(#ar)"/>
+    <path d="M350,292 C375,292 375,240 400,240" marker-end="url(#ar)"/>
+  </g>
+  <text x="54" y="346" class="note">+ Robust &amp; accurate.  − You maintain two codebases (batch &amp; stream) for the same logic.</text>
+
+  <!-- ===================== KAPPA (top-right) ===================== -->
+  <rect x="618" y="90" width="548" height="280" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+  <rect x="618" y="90" width="548" height="6" rx="3" fill="#2f82d8"/>
+  <text x="638" y="124" class="ptitle" fill="#1f69bf">κ  Kappa</text>
+  <text x="724" y="124" class="ptag">One streaming path for everything</text>
+
+  <rect x="638" y="210" width="92" height="44" rx="8" fill="#eef2f7" stroke="#cfd8e2"/><text x="684" y="236" text-anchor="middle" class="box">Source</text>
+  <rect x="762" y="210" width="150" height="44" rx="8" fill="#dbeafe" stroke="#2f82d8"/><text x="837" y="230" text-anchor="middle" class="box">Stream engine</text><text x="837" y="246" text-anchor="middle" class="boxs">Kafka + Flink</text>
+  <rect x="944" y="210" width="150" height="44" rx="8" fill="#bfdcff" stroke="#1f69bf"/><text x="1019" y="236" text-anchor="middle" class="box">Serving layer</text>
+  <g class="edge">
+    <path d="M730,232 H760" marker-end="url(#ar)"/>
+    <path d="M912,232 H942" marker-end="url(#ar)"/>
+  </g>
+  <!-- reprocess loop -->
+  <path d="M837,254 C837,300 684,300 684,254" class="edge" marker-end="url(#ar)"/>
+  <text x="760" y="296" class="boxs">replay the log to reprocess</text>
+  <text x="638" y="346" class="note">+ One codebase, real-time by default.  − Reprocessing history = replaying the whole stream.</text>
+
+  <!-- ===================== DELTA / LAKEHOUSE (bottom-left) ===================== -->
+  <rect x="34" y="390" width="560" height="300" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+  <rect x="34" y="390" width="560" height="6" rx="3" fill="#8a52c9"/>
+  <text x="54" y="424" class="ptitle" fill="#6b39b0">Δ  Delta / Lakehouse</text>
+  <text x="250" y="424" class="ptag">One table format, batch + stream together</text>
+
+  <rect x="54" y="470" width="92" height="44" rx="8" fill="#eef2f7" stroke="#cfd8e2"/><text x="100" y="496" text-anchor="middle" class="box">Batch</text>
+  <rect x="54" y="540" width="92" height="44" rx="8" fill="#eef2f7" stroke="#cfd8e2"/><text x="100" y="566" text-anchor="middle" class="box">Stream</text>
+  <rect x="190" y="505" width="190" height="48" rx="8" fill="#eaddfa" stroke="#8a52c9"/><text x="285" y="525" text-anchor="middle" class="box">Delta / Iceberg table</text><text x="285" y="541" text-anchor="middle" class="boxs">ACID · time travel · schema</text>
+  <rect x="430" y="505" width="140" height="48" rx="8" fill="#d9c3f2" stroke="#6b39b0"/><text x="500" y="525" text-anchor="middle" class="box">BI · ML · SQL</text><text x="500" y="541" text-anchor="middle" class="boxs">one source of truth</text>
+  <g class="edge">
+    <path d="M146,492 C170,492 170,520 190,522" marker-end="url(#ar)"/>
+    <path d="M146,562 C170,562 170,536 190,536" marker-end="url(#ar)"/>
+    <path d="M380,529 H428" marker-end="url(#ar)"/>
+  </g>
+  <text x="54" y="600" class="note">+ Reliability of a warehouse on cheap lake storage.</text>
+  <text x="54" y="620" class="note">+ Batch &amp; streaming read/write the SAME table — no dual systems.</text>
+  <text x="54" y="640" class="note">Powers Databricks (Delta Lake) and open lakehouses (Apache Iceberg).</text>
+
+  <!-- ===================== MEDALLION (bottom-right) ===================== -->
+  <rect x="618" y="390" width="548" height="300" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#sh)"/>
+  <rect x="618" y="390" width="548" height="6" rx="3" fill="#15a877"/>
+  <text x="638" y="424" class="ptitle" fill="#0f8a63">🥇 Medallion</text>
+  <text x="748" y="424" class="ptag">Refine data in layers: Bronze → Silver → Gold</text>
+
+  <!-- bronze -->
+  <rect x="638" y="455" width="500" height="56" rx="10" fill="#f6e2c8" stroke="#b4752b"/>
+  <text x="658" y="479" class="box" fill="#8a5a1e">🥉 Bronze — Raw</text>
+  <text x="658" y="498" class="boxs">ingested as-is, append-only history</text>
+  <!-- silver -->
+  <rect x="668" y="525" width="470" height="56" rx="10" fill="#e8edf2" stroke="#8b98a8"/>
+  <text x="688" y="549" class="box" fill="#55606e">🥈 Silver — Cleaned</text>
+  <text x="688" y="568" class="boxs">validated, deduped, conformed, joined</text>
+  <!-- gold -->
+  <rect x="698" y="595" width="440" height="56" rx="10" fill="#fbeecb" stroke="#c9a227"/>
+  <text x="718" y="619" class="box" fill="#8a6d12">🥇 Gold — Curated</text>
+  <text x="718" y="638" class="boxs">business-level aggregates for BI &amp; ML</text>
+
+  <g class="edge">
+    <path d="M888,511 V523" marker-end="url(#ar)"/>
+    <path d="M918,581 V593" marker-end="url(#ar)"/>
+  </g>
+  <text x="638" y="676" class="note">+ Quality improves at each hop.  Commonly implemented ON Delta/Iceberg tables.</text>
+</svg>
