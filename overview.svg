@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" font-family="'Segoe UI', Arial, sans-serif" role="img" aria-label="Animated overview of the full data engineering pipeline across seven stages">
+  <defs>
+    <linearGradient id="ovbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1322"/><stop offset="0.5" stop-color="#0d1b2b"/><stop offset="1" stop-color="#0a1f1b"/>
+    </linearGradient>
+    <linearGradient id="ovpipe" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7c6cff"/><stop offset="0.25" stop-color="#4f8cf7"/><stop offset="0.5" stop-color="#2f9fe0"/><stop offset="0.75" stop-color="#1bbf9a"/><stop offset="1" stop-color="#17b890"/>
+      <animate attributeName="x1" values="0;0.3;0" dur="6s" repeatCount="indefinite"/>
+    </linearGradient>
+    <radialGradient id="ovorb" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2f9fe0" stop-opacity=".30"/><stop offset="1" stop-color="#2f9fe0" stop-opacity="0"/></radialGradient>
+    <filter id="ovglow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>
+      .title{font-size:26px;font-weight:800;fill:#fff}
+      .sub{font-size:13.5px;fill:#8ea3b8}
+      .snum{font-size:12px;font-weight:800;fill:#0b1322}
+      .sname{font-size:12.5px;font-weight:800;fill:#fff}
+      .scombo{font-size:9.5px;fill:#cdd9e6}
+      .cap{font-size:11.5px;fill:#6f8aa3}
+    </style>
+  </defs>
+
+  <rect width="1200" height="560" rx="18" fill="url(#ovbg)"/>
+  <circle cx="180" cy="120" r="220" fill="url(#ovorb)"/>
+  <circle cx="1030" cy="440" r="240" fill="url(#ovorb)"/>
+
+  <text x="48" y="56" class="title">The Data Engineering Pipeline — End to End</text>
+  <text x="48" y="82" class="sub">Raw sources on the left → trustworthy, query-ready data on the right. Watch the data flow through every stage.</text>
+
+  <!-- Source + Sink labels -->
+  <g filter="url(#ovglow)">
+    <rect x="40" y="250" width="92" height="60" rx="12" fill="#243247"/>
+    <rect x="1068" y="250" width="94" height="60" rx="12" fill="#1f5a4a"/>
+  </g>
+  <text x="86" y="276" text-anchor="middle" class="sname" font-size="11">Sources</text>
+  <text x="86" y="294" text-anchor="middle" class="scombo">DBs · APIs · events</text>
+  <text x="1115" y="276" text-anchor="middle" class="sname" font-size="11">Insight</text>
+  <text x="1115" y="294" text-anchor="middle" class="scombo">BI · ML · apps</text>
+
+  <!-- the flowing pipe -->
+  <rect x="150" y="272" width="900" height="16" rx="8" fill="url(#ovpipe)"/>
+  <!-- dashed moving flow line on top of pipe -->
+  <line x1="150" y1="280" x2="1050" y2="280" stroke="#ffffff" stroke-width="2" stroke-dasharray="3 14" stroke-linecap="round" opacity="0.7">
+    <animate attributeName="stroke-dashoffset" from="0" to="-34" dur="0.9s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- animated data packets travelling the whole pipe -->
+  <g>
+    <circle r="7" fill="#ffffff" filter="url(#ovglow)">
+      <animate attributeName="cx" from="150" to="1050" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="280;280" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;1;0" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="6" fill="#9ff0d6" filter="url(#ovglow)">
+      <animate attributeName="cx" from="150" to="1050" dur="5s" begin="1.1s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="280;280" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;1;0" dur="5s" begin="1.1s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="6" fill="#b9c6ff" filter="url(#ovglow)">
+      <animate attributeName="cx" from="150" to="1050" dur="5s" begin="2.2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="280;280" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;1;0" dur="5s" begin="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="5" fill="#7cd0ff" filter="url(#ovglow)">
+      <animate attributeName="cx" from="150" to="1050" dur="5s" begin="3.3s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="280;280" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;1;0" dur="5s" begin="3.3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- 7 stage cards: alternate above / below the pipe. x centers roughly 190,333,476,619,762,905,1010 -->
+  <!-- connector stems + nodes drawn, then cards -->
+  <g>
+    <!-- node dots on pipe -->
+    <circle cx="200" cy="280" r="9" fill="#7c6cff"><animate attributeName="r" values="9;13;9" dur="2.2s" repeatCount="indefinite"/></circle>
+    <circle cx="342" cy="280" r="9" fill="#6287f6"><animate attributeName="r" values="9;13;9" dur="2.2s" begin="0.3s" repeatCount="indefinite"/></circle>
+    <circle cx="484" cy="280" r="9" fill="#4f9ae8"><animate attributeName="r" values="9;13;9" dur="2.2s" begin="0.6s" repeatCount="indefinite"/></circle>
+    <circle cx="626" cy="280" r="9" fill="#2f9fe0"><animate attributeName="r" values="9;13;9" dur="2.2s" begin="0.9s" repeatCount="indefinite"/></circle>
+    <circle cx="768" cy="280" r="9" fill="#1fb6a6"><animate attributeName="r" values="9;13;9" dur="2.2s" begin="1.2s" repeatCount="indefinite"/></circle>
+    <circle cx="910" cy="280" r="9" fill="#19ad94"><animate attributeName="r" values="9;13;9" dur="2.2s" begin="1.5s" repeatCount="indefinite"/></circle>
+    <circle cx="1010" cy="280" r="9" fill="#13a07f"><animate attributeName="r" values="9;13;9" dur="2.2s" begin="1.8s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- stems -->
+  <g stroke="#30455c" stroke-width="2">
+    <line x1="200" y1="272" x2="200" y2="150"/>
+    <line x1="342" y1="288" x2="342" y2="400"/>
+    <line x1="484" y1="272" x2="484" y2="150"/>
+    <line x1="626" y1="288" x2="626" y2="400"/>
+    <line x1="768" y1="272" x2="768" y2="150"/>
+    <line x1="910" y1="288" x2="910" y2="400"/>
+    <line x1="1010" y1="272" x2="1010" y2="150"/>
+  </g>
+
+  <!-- CARD 1 Ingestion (top) -->
+  <g filter="url(#ovglow)"><rect x="140" y="92" width="150" height="60" rx="11" fill="#2a2470" stroke="#7c6cff"/></g>
+  <text x="152" y="112" class="snum" fill="#cfc8ff">01</text><text x="176" y="112" class="sname">Ingestion</text>
+  <text x="152" y="128" class="scombo">Kafka+Debezium · Kafka+Flink</text>
+  <text x="152" y="142" class="scombo">Airbyte+dbt</text>
+
+  <!-- CARD 2 Transformation (bottom) -->
+  <g filter="url(#ovglow)"><rect x="282" y="402" width="150" height="60" rx="11" fill="#1e3b78" stroke="#6287f6"/></g>
+  <text x="294" y="422" class="snum" fill="#c3d4ff">02</text><text x="318" y="422" class="sname">Transformation</text>
+  <text x="294" y="438" class="scombo">Python+Pandas · PySpark</text>
+  <text x="294" y="452" class="scombo">SQL+dbt</text>
+
+  <!-- CARD 3 Orchestration (top) -->
+  <g filter="url(#ovglow)"><rect x="424" y="92" width="150" height="60" rx="11" fill="#1b4a78" stroke="#4f9ae8"/></g>
+  <text x="436" y="112" class="snum" fill="#c3e2ff">03</text><text x="460" y="112" class="sname">Orchestration</text>
+  <text x="436" y="128" class="scombo">Airflow+Python</text>
+  <text x="436" y="142" class="scombo">Docker+Airflow</text>
+
+  <!-- CARD 4 Storage (bottom) -->
+  <g filter="url(#ovglow)"><rect x="566" y="402" width="156" height="60" rx="11" fill="#154f6e" stroke="#2f9fe0"/></g>
+  <text x="578" y="422" class="snum" fill="#bfe9ff">04</text><text x="602" y="422" class="sname">Storage · Lakehouse</text>
+  <text x="578" y="438" class="scombo">S3/Spark+Iceberg · Snowflake+dbt</text>
+  <text x="578" y="452" class="scombo">Databricks+Delta Lake</text>
+
+  <!-- CARD 5 Quality (top) -->
+  <g filter="url(#ovglow)"><rect x="708" y="92" width="156" height="60" rx="11" fill="#115a4e" stroke="#1fb6a6"/></g>
+  <text x="720" y="112" class="snum" fill="#b7f0e4">05</text><text x="744" y="112" class="sname">Quality · Lineage</text>
+  <text x="720" y="128" class="scombo">Great Expectations+Python</text>
+  <text x="720" y="142" class="scombo">DataHub+OpenLineage</text>
+
+  <!-- CARD 6 Deploy (bottom) -->
+  <g filter="url(#ovglow)"><rect x="850" y="402" width="150" height="60" rx="11" fill="#0f5a47" stroke="#19ad94"/></g>
+  <text x="862" y="422" class="snum" fill="#b7f0df">06</text><text x="886" y="422" class="sname">Deploy · IaC</text>
+  <text x="862" y="438" class="scombo">Terraform+Cloud</text>
+  <text x="862" y="452" class="scombo">Git+CI/CD</text>
+
+  <!-- CARD 7 Observability (top) -->
+  <g filter="url(#ovglow)"><rect x="952" y="92" width="168" height="60" rx="11" fill="#0d5240" stroke="#13a07f"/></g>
+  <text x="964" y="112" class="snum" fill="#b7f0df">07</text><text x="988" y="112" class="sname">Observability</text>
+  <text x="964" y="128" class="scombo">Grafana+Prometheus</text>
+  <text x="964" y="142" class="scombo">metrics · alerts · health</text>
+
+  <!-- legend / footer -->
+  <rect x="40" y="500" width="1120" height="40" rx="10" fill="#111f30" stroke="#223348"/>
+  <circle cx="64" cy="520" r="6" fill="#ffffff"/><text x="78" y="524" class="cap">moving dots = data flowing through the pipeline</text>
+  <text x="430" y="524" class="cap">cards = the 7 stages, each with its go-to tool combinations</text>
+  <text x="1150" y="524" text-anchor="end" class="cap">by eswaran-hariharan</text>
+</svg>

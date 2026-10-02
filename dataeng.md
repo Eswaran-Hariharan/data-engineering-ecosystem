@@ -4,6 +4,10 @@
 
 Most people learn tools in isolation: "I know Spark," "I know Airflow." But real data engineering is knowing **which tools pair up to solve a specific problem**, and **how data flows between them**. This guide walks the whole pipeline, one stage at a time, with the tool combinations worth knowing at each step.
 
+![Animated end-to-end data engineering pipeline overview](overview.svg)
+
+*The whole journey at a glance — raw sources on the left flow through all seven stages to insight on the right. The dots are data moving through the pipeline; each card is a stage with its go-to tool combinations.*
+
 ![Animated data engineering pipeline](pipeline.svg)
 
 *Data flows left → right. Each stage pairs tools that solve one job together.*
