@@ -6,16 +6,17 @@
     <linearGradient id="ovpipe" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#8b7bff"/><stop offset="0.25" stop-color="#5fa0ff"/><stop offset="0.5" stop-color="#38b2f0"/><stop offset="0.75" stop-color="#1fd0a8"/><stop offset="1" stop-color="#1ec997"/>
     </linearGradient>
-    <radialGradient id="ovorb" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#38b2f0" stop-opacity=".22"/><stop offset="1" stop-color="#38b2f0" stop-opacity="0"/></radialGradient>
-    <filter id="ovglow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="ovorb" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#38b2f0" stop-opacity=".2"/><stop offset="1" stop-color="#38b2f0" stop-opacity="0"/></radialGradient>
+    <filter id="ovsh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/></filter>
+    <filter id="dotglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <style>
       .title{font-size:27px;font-weight:800;fill:#ffffff}
       .sub{font-size:14px;fill:#aebccb}
-      .sname{font-size:13.5px;font-weight:800;fill:#ffffff}
-      .scombo{font-size:10.5px;fill:#ffffff;opacity:0.95}
+      .snum{font-size:14px;font-weight:900}
+      .sname{font-size:14px;font-weight:800;fill:#15233a}
+      .scombo{font-size:10.5px;fill:#36475c}
       .cap{font-size:12px;fill:#9fb3c6}
-      .chip{font-size:12px;font-weight:900;fill:#0e1a2b}
-      .endlabel{font-size:12px;font-weight:800;fill:#ffffff}
+      .endlabel{font-size:12.5px;font-weight:800;fill:#ffffff}
       .endsub{font-size:10.5px;fill:#d7e3ef}
     </style>
   </defs>
@@ -27,26 +28,19 @@
   <text x="48" y="56" class="title">The Data Engineering Pipeline — End to End</text>
   <text x="48" y="84" class="sub">Raw sources on the left → trustworthy, query-ready data on the right. Watch the data flow through every stage.</text>
 
-  <!-- ===================== CONNECTOR STEMS (drawn first, bright + thick, color-matched) ===================== -->
-  <g stroke-width="3.5" fill="none" opacity="0.95">
-    <path d="M205,300 V170" stroke="#8b7bff"/>
-    <path d="M352,300 V410" stroke="#5f86f6"/>
-    <path d="M499,300 V170" stroke="#4f9ae8"/>
-    <path d="M646,300 V410" stroke="#38b2f0"/>
-    <path d="M793,300 V170" stroke="#1fc4b0"/>
-    <path d="M940,300 V410" stroke="#1ec997"/>
-    <path d="M1030,300 V170" stroke="#19b386"/>
-  </g>
-  <!-- small connector end-dots where stem meets card -->
-  <g>
-    <circle cx="205" cy="170" r="4.5" fill="#8b7bff"/><circle cx="499" cy="170" r="4.5" fill="#4f9ae8"/>
-    <circle cx="793" cy="170" r="4.5" fill="#1fc4b0"/><circle cx="1030" cy="170" r="4.5" fill="#19b386"/>
-    <circle cx="352" cy="410" r="4.5" fill="#5f86f6"/><circle cx="646" cy="410" r="4.5" fill="#38b2f0"/>
-    <circle cx="940" cy="410" r="4.5" fill="#1ec997"/>
+  <!-- ===================== CONNECTOR STEMS (bright, color-matched) ===================== -->
+  <g stroke-width="3.5" fill="none">
+    <path d="M205,300 V176" stroke="#8b7bff"/>
+    <path d="M352,300 V404" stroke="#5f86f6"/>
+    <path d="M499,300 V176" stroke="#4f9ae8"/>
+    <path d="M646,300 V404" stroke="#38b2f0"/>
+    <path d="M793,300 V176" stroke="#17b6a0"/>
+    <path d="M940,300 V404" stroke="#17b589"/>
+    <path d="M1030,300 V176" stroke="#139e74"/>
   </g>
 
   <!-- ===================== END CAPS ===================== -->
-  <g filter="url(#ovglow)">
+  <g filter="url(#ovsh)">
     <rect x="40" y="268" width="100" height="64" rx="12" fill="#2b3b52" stroke="#6a84a0" stroke-width="1.5"/>
     <rect x="1060" y="268" width="104" height="64" rx="12" fill="#1f6b57" stroke="#2fd0a8" stroke-width="1.5"/>
   </g>
@@ -63,92 +57,89 @@
 
   <!-- animated data packets -->
   <g>
-    <circle r="7.5" fill="#ffffff" filter="url(#ovglow)">
+    <circle r="7.5" fill="#ffffff" filter="url(#dotglow)">
       <animate attributeName="cx" from="150" to="1060" dur="5s" repeatCount="indefinite"/>
       <animate attributeName="cy" values="300;300" dur="5s" repeatCount="indefinite"/>
       <animate attributeName="opacity" values="0;1;1;1;0" dur="5s" repeatCount="indefinite"/>
     </circle>
-    <circle r="6.5" fill="#b7ffe8" filter="url(#ovglow)">
+    <circle r="6.5" fill="#b7ffe8" filter="url(#dotglow)">
       <animate attributeName="cx" from="150" to="1060" dur="5s" begin="1.25s" repeatCount="indefinite"/>
       <animate attributeName="cy" values="300;300" dur="5s" repeatCount="indefinite"/>
       <animate attributeName="opacity" values="0;1;1;1;0" dur="5s" begin="1.25s" repeatCount="indefinite"/>
     </circle>
-    <circle r="6.5" fill="#cdd6ff" filter="url(#ovglow)">
+    <circle r="6.5" fill="#cdd6ff" filter="url(#dotglow)">
       <animate attributeName="cx" from="150" to="1060" dur="5s" begin="2.5s" repeatCount="indefinite"/>
       <animate attributeName="cy" values="300;300" dur="5s" repeatCount="indefinite"/>
       <animate attributeName="opacity" values="0;1;1;1;0" dur="5s" begin="2.5s" repeatCount="indefinite"/>
     </circle>
-    <circle r="5.5" fill="#9fe0ff" filter="url(#ovglow)">
-      <animate attributeName="cx" from="150" to="1060" dur="5s" begin="3.75s" repeatCount="indefinite"/>
-      <animate attributeName="cy" values="300;300" dur="5s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0;1;1;1;0" dur="5s" begin="3.75s" repeatCount="indefinite"/>
-    </circle>
   </g>
 
-  <!-- node dots on pipe (bright ring so connectivity reads clearly) -->
+  <!-- node dots on pipe (white ring, color-matched) -->
   <g>
-    <circle cx="205" cy="300" r="8" fill="#8b7bff" stroke="#fff" stroke-width="2"><animate attributeName="r" values="8;12;8" dur="2.2s" repeatCount="indefinite"/></circle>
-    <circle cx="352" cy="300" r="8" fill="#5f86f6" stroke="#fff" stroke-width="2"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="0.3s" repeatCount="indefinite"/></circle>
-    <circle cx="499" cy="300" r="8" fill="#4f9ae8" stroke="#fff" stroke-width="2"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="0.6s" repeatCount="indefinite"/></circle>
-    <circle cx="646" cy="300" r="8" fill="#38b2f0" stroke="#fff" stroke-width="2"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="0.9s" repeatCount="indefinite"/></circle>
-    <circle cx="793" cy="300" r="8" fill="#1fc4b0" stroke="#fff" stroke-width="2"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="1.2s" repeatCount="indefinite"/></circle>
-    <circle cx="940" cy="300" r="8" fill="#1ec997" stroke="#fff" stroke-width="2"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="1.5s" repeatCount="indefinite"/></circle>
-    <circle cx="1030" cy="300" r="8" fill="#19b386" stroke="#fff" stroke-width="2"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="1.8s" repeatCount="indefinite"/></circle>
+    <circle cx="205" cy="300" r="8" fill="#8b7bff" stroke="#fff" stroke-width="2.5"><animate attributeName="r" values="8;12;8" dur="2.2s" repeatCount="indefinite"/></circle>
+    <circle cx="352" cy="300" r="8" fill="#5f86f6" stroke="#fff" stroke-width="2.5"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="0.3s" repeatCount="indefinite"/></circle>
+    <circle cx="499" cy="300" r="8" fill="#4f9ae8" stroke="#fff" stroke-width="2.5"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="0.6s" repeatCount="indefinite"/></circle>
+    <circle cx="646" cy="300" r="8" fill="#38b2f0" stroke="#fff" stroke-width="2.5"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="0.9s" repeatCount="indefinite"/></circle>
+    <circle cx="793" cy="300" r="8" fill="#17b6a0" stroke="#fff" stroke-width="2.5"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="1.2s" repeatCount="indefinite"/></circle>
+    <circle cx="940" cy="300" r="8" fill="#17b589" stroke="#fff" stroke-width="2.5"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="1.5s" repeatCount="indefinite"/></circle>
+    <circle cx="1030" cy="300" r="8" fill="#139e74" stroke="#fff" stroke-width="2.5"><animate attributeName="r" values="8;12;8" dur="2.2s" begin="1.8s" repeatCount="indefinite"/></circle>
   </g>
 
-  <!-- ===================== STAGE CARDS (solid high-contrast fills, white number chips) ===================== -->
+  <!-- ===================== STAGE CARDS: light cards + colored top accent bar + big colored number ===================== -->
+  <!-- card template: white rounded rect (shadow), colored accent strip on top, "NN" big colored, title dark, combos dark grey -->
+
   <!-- 01 Ingestion (top) -->
-  <g filter="url(#ovglow)"><rect x="128" y="104" width="162" height="66" rx="12" fill="#6b5cf0" stroke="#b9afff" stroke-width="1.5"/></g>
-  <circle cx="148" cy="124" r="12" fill="#ffffff"/><text x="148" y="128" text-anchor="middle" class="chip">01</text>
-  <text x="168" y="128" class="sname">Ingestion</text>
-  <text x="140" y="146" class="scombo">Kafka+Debezium · Kafka+Flink</text>
-  <text x="140" y="161" class="scombo">Airbyte+dbt</text>
+  <g filter="url(#ovsh)"><rect x="120" y="110" width="176" height="66" rx="12" fill="#ffffff"/></g>
+  <path d="M132,110 h152 a12,12 0 0 1 12,12 v4 H120 v-4 a12,12 0 0 1 12,-12 z" fill="#8b7bff"/>
+  <text x="134" y="150" class="snum" fill="#6b5cf0">01</text>
+  <text x="162" y="150" class="sname">Ingestion</text>
+  <text x="134" y="166" class="scombo">Kafka+Debezium · Kafka+Flink · Airbyte+dbt</text>
 
   <!-- 02 Transformation (bottom) -->
-  <g filter="url(#ovglow)"><rect x="271" y="410" width="162" height="66" rx="12" fill="#3f6fe6" stroke="#a9c2ff" stroke-width="1.5"/></g>
-  <circle cx="291" cy="430" r="12" fill="#ffffff"/><text x="291" y="434" text-anchor="middle" class="chip">02</text>
-  <text x="311" y="434" class="sname">Transformation</text>
-  <text x="283" y="452" class="scombo">Python+Pandas · PySpark</text>
-  <text x="283" y="467" class="scombo">SQL+dbt</text>
+  <g filter="url(#ovsh)"><rect x="264" y="404" width="176" height="66" rx="12" fill="#ffffff"/></g>
+  <path d="M276,404 h152 a12,12 0 0 1 12,12 v4 H264 v-4 a12,12 0 0 1 12,-12 z" fill="#5f86f6"/>
+  <text x="278" y="444" class="snum" fill="#3f6fe6">02</text>
+  <text x="306" y="444" class="sname">Transformation</text>
+  <text x="278" y="460" class="scombo">Python+Pandas · PySpark · SQL+dbt</text>
 
   <!-- 03 Orchestration (top) -->
-  <g filter="url(#ovglow)"><rect x="418" y="104" width="162" height="66" rx="12" fill="#2f82d8" stroke="#a6d4f5" stroke-width="1.5"/></g>
-  <circle cx="438" cy="124" r="12" fill="#ffffff"/><text x="438" y="128" text-anchor="middle" class="chip">03</text>
-  <text x="458" y="128" class="sname">Orchestration</text>
-  <text x="430" y="146" class="scombo">Airflow+Python</text>
-  <text x="430" y="161" class="scombo">Docker+Airflow</text>
+  <g filter="url(#ovsh)"><rect x="411" y="110" width="176" height="66" rx="12" fill="#ffffff"/></g>
+  <path d="M423,110 h152 a12,12 0 0 1 12,12 v4 H411 v-4 a12,12 0 0 1 12,-12 z" fill="#4f9ae8"/>
+  <text x="425" y="150" class="snum" fill="#2f82d8">03</text>
+  <text x="453" y="150" class="sname">Orchestration</text>
+  <text x="425" y="166" class="scombo">Airflow+Python · Docker+Airflow</text>
 
   <!-- 04 Storage (bottom) -->
-  <g filter="url(#ovglow)"><rect x="560" y="410" width="172" height="66" rx="12" fill="#1f93c9" stroke="#9fdcf2" stroke-width="1.5"/></g>
-  <circle cx="580" cy="430" r="12" fill="#ffffff"/><text x="580" y="434" text-anchor="middle" class="chip">04</text>
-  <text x="600" y="434" class="sname">Storage · Lakehouse</text>
-  <text x="572" y="452" class="scombo">S3/Spark+Iceberg · Snowflake+dbt</text>
-  <text x="572" y="467" class="scombo">Databricks+Delta Lake</text>
+  <g filter="url(#ovsh)"><rect x="556" y="404" width="182" height="66" rx="12" fill="#ffffff"/></g>
+  <path d="M568,404 h158 a12,12 0 0 1 12,12 v4 H556 v-4 a12,12 0 0 1 12,-12 z" fill="#38b2f0"/>
+  <text x="570" y="444" class="snum" fill="#1f93c9">04</text>
+  <text x="598" y="444" class="sname">Storage · Lakehouse</text>
+  <text x="570" y="460" class="scombo">S3/Spark+Iceberg · Snowflake+dbt · Delta Lake</text>
 
   <!-- 05 Quality (top) -->
-  <g filter="url(#ovglow)"><rect x="712" y="104" width="166" height="66" rx="12" fill="#15a894" stroke="#8ff0e1" stroke-width="1.5"/></g>
-  <circle cx="732" cy="124" r="12" fill="#ffffff"/><text x="732" y="128" text-anchor="middle" class="chip">05</text>
-  <text x="752" y="128" class="sname">Quality · Lineage</text>
-  <text x="724" y="146" class="scombo">Great Expectations+Python</text>
-  <text x="724" y="161" class="scombo">DataHub+OpenLineage</text>
+  <g filter="url(#ovsh)"><rect x="705" y="110" width="180" height="66" rx="12" fill="#ffffff"/></g>
+  <path d="M717,110 h156 a12,12 0 0 1 12,12 v4 H705 v-4 a12,12 0 0 1 12,-12 z" fill="#17b6a0"/>
+  <text x="719" y="150" class="snum" fill="#13937f">05</text>
+  <text x="747" y="150" class="sname">Quality · Lineage</text>
+  <text x="719" y="166" class="scombo">Great Expectations+Python · DataHub+OpenLineage</text>
 
   <!-- 06 Deploy (bottom) -->
-  <g filter="url(#ovglow)"><rect x="859" y="410" width="162" height="66" rx="12" fill="#15a877" stroke="#8ff0cf" stroke-width="1.5"/></g>
-  <circle cx="879" cy="430" r="12" fill="#ffffff"/><text x="879" y="434" text-anchor="middle" class="chip">06</text>
-  <text x="899" y="434" class="sname">Deploy · IaC</text>
-  <text x="871" y="452" class="scombo">Terraform+Cloud</text>
-  <text x="871" y="467" class="scombo">Git+CI/CD</text>
+  <g filter="url(#ovsh)"><rect x="852" y="404" width="176" height="66" rx="12" fill="#ffffff"/></g>
+  <path d="M864,404 h152 a12,12 0 0 1 12,12 v4 H852 v-4 a12,12 0 0 1 12,-12 z" fill="#17b589"/>
+  <text x="866" y="444" class="snum" fill="#139669">06</text>
+  <text x="894" y="444" class="sname">Deploy · IaC</text>
+  <text x="866" y="460" class="scombo">Terraform+Cloud · Git+CI/CD</text>
 
   <!-- 07 Observability (top) -->
-  <g filter="url(#ovglow)"><rect x="952" y="104" width="180" height="66" rx="12" fill="#139e74" stroke="#8ff0cf" stroke-width="1.5"/></g>
-  <circle cx="972" cy="124" r="12" fill="#ffffff"/><text x="972" y="128" text-anchor="middle" class="chip">07</text>
-  <text x="992" y="128" class="sname">Observability</text>
-  <text x="964" y="146" class="scombo">Grafana+Prometheus</text>
-  <text x="964" y="161" class="scombo">metrics · alerts · health</text>
+  <g filter="url(#ovsh)"><rect x="945" y="110" width="190" height="66" rx="12" fill="#ffffff"/></g>
+  <path d="M957,110 h166 a12,12 0 0 1 12,12 v4 H945 v-4 a12,12 0 0 1 12,-12 z" fill="#139e74"/>
+  <text x="959" y="150" class="snum" fill="#0f8a63">07</text>
+  <text x="987" y="150" class="sname">Observability</text>
+  <text x="959" y="166" class="scombo">Grafana+Prometheus · metrics · alerts</text>
 
   <!-- legend / footer -->
   <rect x="40" y="516" width="1120" height="44" rx="11" fill="#152536" stroke="#2b4056" stroke-width="1.5"/>
   <circle cx="66" cy="538" r="6.5" fill="#ffffff"/><text x="82" y="542" class="cap">moving dots = data flowing through the pipeline</text>
-  <rect x="470" y="532" width="20" height="4" rx="2" fill="#5fa0ff"/><text x="500" y="542" class="cap">colored lines connect each stage to the pipe</text>
+  <rect x="470" y="533" width="20" height="4" rx="2" fill="#5fa0ff"/><text x="500" y="542" class="cap">colored lines connect each stage to the pipe</text>
   <text x="1150" y="542" text-anchor="end" class="cap">by eswaran-hariharan</text>
 </svg>
