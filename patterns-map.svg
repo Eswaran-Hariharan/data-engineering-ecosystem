@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" font-family="'Segoe UI', Arial, sans-serif" role="img" aria-label="Foundational and organizational data architecture patterns map">
+  <defs>
+    <marker id="pr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#8aa0b6"/></marker>
+    <filter id="ps" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0b1a2a" flood-opacity="0.3"/></filter>
+    <style>
+      .h{font-size:16px;font-weight:800}
+      .tag{font-size:11px;font-weight:700;fill:#5a6b7b}
+      .box{font-size:12px;font-weight:700;fill:#15233a}
+      .boxs{font-size:9.5px;fill:#3f5168}
+      .note{font-size:10.5px;fill:#5a6b7b}
+      .edge{stroke:#8aa0b6;stroke-width:1.8;fill:none}
+      .lane{font-size:12.5px;font-weight:800;letter-spacing:.5px}
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" rx="16" fill="#f4f7fb"/>
+  <text x="34" y="42" font-size="24" font-weight="800" fill="#15233a">The Bigger Map — Foundational &amp; Organizational Patterns</text>
+  <text x="34" y="66" font-size="13.5" fill="#5a6b7b">Where your data lives, how it's loaded, and how teams own it.</text>
+
+  <!-- ===================== LANE A: storage evolution ===================== -->
+  <text x="34" y="104" class="lane" fill="#2f82d8">① STORAGE EVOLUTION</text>
+  <rect x="34" y="116" width="1132" height="130" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#ps)"/>
+
+  <rect x="60" y="150" width="300" height="64" rx="10" fill="#dbeafe" stroke="#2f82d8"/>
+  <text x="78" y="176" class="box">Data Warehouse</text>
+  <text x="78" y="194" class="boxs">structured · schema-on-write · SQL/BI</text>
+  <text x="78" y="208" class="boxs">Snowflake · BigQuery · Redshift</text>
+
+  <rect x="450" y="150" width="300" height="64" rx="10" fill="#e7f6ec" stroke="#3aa757"/>
+  <text x="468" y="176" class="box">Data Lake</text>
+  <text x="468" y="194" class="boxs">raw files · schema-on-read · cheap</text>
+  <text x="468" y="208" class="boxs">S3 · ADLS · GCS</text>
+
+  <rect x="840" y="150" width="300" height="64" rx="10" fill="#eaddfa" stroke="#8a52c9"/>
+  <text x="858" y="176" class="box">Lakehouse</text>
+  <text x="858" y="194" class="boxs">lake storage + warehouse reliability</text>
+  <text x="858" y="208" class="boxs">Delta Lake · Apache Iceberg</text>
+
+  <g class="edge">
+    <path d="M360,182 H448" marker-end="url(#pr)"/>
+    <path d="M750,182 H838" marker-end="url(#pr)"/>
+  </g>
+  <text x="372" y="174" class="boxs">+ scale, cheap</text>
+  <text x="762" y="174" class="boxs">+ reliability</text>
+
+  <!-- ===================== LANE B: ETL vs ELT ===================== -->
+  <text x="34" y="286" class="lane" fill="#ec7211">② HOW DATA IS LOADED — ETL vs ELT</text>
+  <rect x="34" y="298" width="560" height="150" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#ps)"/>
+  <text x="54" y="326" class="box" fill="#c75e0e">ETL — transform, then load</text>
+  <rect x="54" y="338" width="92" height="36" rx="7" fill="#eef2f7" stroke="#cfd8e2"/><text x="100" y="361" text-anchor="middle" class="boxs">Extract</text>
+  <rect x="166" y="338" width="92" height="36" rx="7" fill="#fde8d4" stroke="#ec7211"/><text x="212" y="361" text-anchor="middle" class="boxs">Transform</text>
+  <rect x="278" y="338" width="92" height="36" rx="7" fill="#dbeafe" stroke="#2f82d8"/><text x="324" y="361" text-anchor="middle" class="boxs">Load (DW)</text>
+  <g class="edge"><path d="M146,356 H164" marker-end="url(#pr)"/><path d="M258,356 H276" marker-end="url(#pr)"/></g>
+  <text x="54" y="398" class="boxs">Classic warehouse era — clean before storing.</text>
+
+  <text x="54" y="424" class="box" fill="#1f7a43">ELT — load, then transform (modern)</text>
+  <rect x="54" y="434" width="92" height="12" rx="4" fill="#eef2f7"/><text x="150" y="444" class="boxs">E → L into lake/DW → Transform in place (dbt/Spark)</text>
+
+  <!-- ===================== LANE B2: Data Vault (modeling) ===================== -->
+  <rect x="618" y="298" width="548" height="150" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#ps)"/>
+  <text x="638" y="326" class="box" fill="#8a6d12">Data Vault — a modeling method</text>
+  <text x="638" y="344" class="tag">Scalable, auditable warehouse modeling</text>
+  <rect x="638" y="356" width="150" height="54" rx="8" fill="#fbeecb" stroke="#c9a227"/><text x="713" y="378" text-anchor="middle" class="box">Hubs</text><text x="713" y="394" text-anchor="middle" class="boxs">business keys</text>
+  <rect x="800" y="356" width="150" height="54" rx="8" fill="#fbeecb" stroke="#c9a227"/><text x="875" y="378" text-anchor="middle" class="box">Links</text><text x="875" y="394" text-anchor="middle" class="boxs">relationships</text>
+  <rect x="962" y="356" width="150" height="54" rx="8" fill="#fbeecb" stroke="#c9a227"/><text x="1037" y="378" text-anchor="middle" class="box">Satellites</text><text x="1037" y="394" text-anchor="middle" class="boxs">attributes · history</text>
+  <text x="638" y="432" class="boxs">Great for auditability &amp; many changing sources (vs star-schema simplicity).</text>
+
+  <!-- ===================== LANE C: organizational ===================== -->
+  <text x="34" y="488" class="lane" fill="#15a877">③ WHO OWNS THE DATA — ORGANIZATIONAL PATTERNS</text>
+
+  <!-- Centralized (hub) -->
+  <rect x="34" y="500" width="365" height="236" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#ps)"/>
+  <text x="54" y="528" class="box">Centralized / Hub-and-Spoke</text>
+  <text x="54" y="546" class="tag">One central team &amp; platform</text>
+  <circle cx="216" cy="620" r="34" fill="#cfe0f5" stroke="#2f82d8"/><text x="216" y="624" text-anchor="middle" class="boxs">Central hub</text>
+  <circle cx="110" cy="580" r="18" fill="#eef2f7" stroke="#cfd8e2"/><circle cx="110" cy="665" r="18" fill="#eef2f7" stroke="#cfd8e2"/>
+  <circle cx="322" cy="580" r="18" fill="#eef2f7" stroke="#cfd8e2"/><circle cx="322" cy="665" r="18" fill="#eef2f7" stroke="#cfd8e2"/>
+  <g class="edge"><line x1="128" y1="588" x2="186" y2="608"/><line x1="128" y1="657" x2="186" y2="634"/><line x1="304" y1="588" x2="246" y2="608"/><line x1="304" y1="657" x2="246" y2="634"/></g>
+  <text x="54" y="718" class="boxs">Simple governance; central team can become a bottleneck.</text>
+
+  <!-- Data Mesh -->
+  <rect x="415" y="500" width="365" height="236" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#ps)"/>
+  <text x="435" y="528" class="box" fill="#0f8a63">Data Mesh — decentralized</text>
+  <text x="435" y="546" class="tag">Domain teams own data as products</text>
+  <rect x="435" y="560" width="150" height="52" rx="8" fill="#d6f3e5" stroke="#15a877"/><text x="510" y="582" text-anchor="middle" class="boxs">Domain A</text><text x="510" y="598" text-anchor="middle" class="boxs">data product</text>
+  <rect x="610" y="560" width="150" height="52" rx="8" fill="#d6f3e5" stroke="#15a877"/><text x="685" y="582" text-anchor="middle" class="boxs">Domain B</text><text x="685" y="598" text-anchor="middle" class="boxs">data product</text>
+  <rect x="435" y="624" width="150" height="52" rx="8" fill="#d6f3e5" stroke="#15a877"/><text x="510" y="646" text-anchor="middle" class="boxs">Domain C</text><text x="510" y="662" text-anchor="middle" class="boxs">data product</text>
+  <rect x="610" y="624" width="150" height="52" rx="8" fill="#d6f3e5" stroke="#15a877"/><text x="685" y="646" text-anchor="middle" class="boxs">Domain D</text><text x="685" y="662" text-anchor="middle" class="boxs">data product</text>
+  <text x="435" y="700" class="boxs">Federated governance · self-serve platform.</text>
+  <text x="435" y="718" class="boxs">Scales org-wide; needs maturity &amp; discipline.</text>
+
+  <!-- Data Fabric -->
+  <rect x="796" y="500" width="370" height="236" rx="14" fill="#ffffff" stroke="#e2e8f0" filter="url(#ps)"/>
+  <text x="816" y="528" class="box" fill="#1f69bf">Data Fabric — connected layer</text>
+  <text x="816" y="546" class="tag">Metadata-driven integration over many systems</text>
+  <rect x="816" y="636" width="330" height="40" rx="8" fill="#dbeafe" stroke="#2f82d8"/><text x="981" y="661" text-anchor="middle" class="box">Unified metadata &amp; access fabric</text>
+  <rect x="820" y="566" width="96" height="40" rx="7" fill="#eef2f7" stroke="#cfd8e2"/><text x="868" y="590" text-anchor="middle" class="boxs">DW</text>
+  <rect x="932" y="566" width="96" height="40" rx="7" fill="#eef2f7" stroke="#cfd8e2"/><text x="980" y="590" text-anchor="middle" class="boxs">Lake</text>
+  <rect x="1044" y="566" width="96" height="40" rx="7" fill="#eef2f7" stroke="#cfd8e2"/><text x="1092" y="590" text-anchor="middle" class="boxs">SaaS/APIs</text>
+  <g class="edge"><line x1="868" y1="606" x2="930" y2="634"/><line x1="980" y1="606" x2="980" y2="634"/><line x1="1092" y1="606" x2="1030" y2="634"/></g>
+  <text x="816" y="700" class="boxs">Tech-centric: a smart layer connects existing silos.</text>
+  <text x="816" y="718" class="boxs">Mesh = org/ownership · Fabric = technology/integration.</text>
+</svg>

@@ -161,6 +161,50 @@ Not an alternative to the others — a **data-quality layout** you apply *inside
 
 ---
 
+## The bigger map — foundational & organizational patterns
+
+The four above are *processing/storage* patterns. Zoom out and there are two more axes worth knowing: **where data lives** (the storage evolution + how it's loaded + how it's modeled) and **who owns it** (organizational patterns). Here's the fuller map.
+
+![Foundational and organizational data architecture patterns](patterns-map.svg)
+
+### Storage evolution — Warehouse → Lake → Lakehouse
+
+- **Data Warehouse** — structured, **schema-on-write**, optimized for SQL/BI. The classic (Snowflake, BigQuery, Redshift). Great for governed analytics; expensive for raw/unstructured data.
+- **Data Lake** — raw files in cheap object storage (S3/ADLS/GCS), **schema-on-read**. Stores anything cheaply, but on its own has no transactions or guarantees ("data swamp" risk).
+- **Lakehouse** — the merge of the two: lake-cheap storage **plus** warehouse reliability (ACID, schema) via **Delta Lake / Apache Iceberg**. This is what the Delta/Medallion section builds on.
+
+> The industry moved **Warehouse → Lake → Lakehouse**, each step adding scale (lake) then reliability (lakehouse).
+
+### How data is loaded — ETL vs ELT
+
+- **ETL (Extract → Transform → Load):** clean/shape data **before** loading it into the warehouse. The classic approach when storage/compute were expensive.
+- **ELT (Extract → Load → Transform):** load raw data first, then **transform in place** with the warehouse/lake's compute (dbt, Spark). The modern default — it's why dbt + Snowflake/BigQuery took over.
+
+### Data modeling — Data Vault (and dimensional)
+
+- **Data Vault** — a modeling methodology using **Hubs** (business keys), **Links** (relationships), and **Satellites** (attributes + history). Built for **auditability, history, and many changing source systems**.
+- **Dimensional / Star schema** (Kimball) — facts + dimensions, simple and fast for BI; common in the **Gold** layer. Vault favors flexibility/audit; star favors query simplicity.
+
+### Who owns the data — organizational patterns
+
+| Pattern | Idea | Good | Watch out |
+|---------|------|------|-----------|
+| **Centralized / Hub-and-Spoke** | One central platform & team feed everyone | Simple governance, consistency | Central team becomes a **bottleneck** |
+| **Data Mesh** | **Decentralized** — domain teams own data **as products**, with federated governance + self-serve platform | Scales across a large org; domain expertise owns quality | Needs org maturity & discipline; not for small teams |
+| **Data Fabric** | A **metadata-driven integration layer** connecting existing systems (DW, lakes, SaaS) | Unifies silos without re-platforming | More tech/tooling complexity |
+
+> **Mesh vs Fabric — the common confusion:** **Data Mesh** is about **organization & ownership** (people/domains own data products). **Data Fabric** is about **technology** (a smart metadata layer stitching systems together). They can even coexist — a fabric can be the platform a mesh runs on.
+
+### Putting the whole picture together
+
+- **Storage:** pick Warehouse, Lake, or (usually) **Lakehouse**.
+- **Loading:** **ELT** by default on modern stacks.
+- **Processing:** **Lambda / Kappa** for batch-vs-stream; **Medallion** to layer quality.
+- **Modeling:** **Data Vault** or **dimensional (star)** depending on audit vs simplicity.
+- **Organization:** **Centralized** for smaller teams; **Data Mesh** (optionally over a **Data Fabric**) as you scale across domains.
+
+---
+
 ## The full combinations reference
 
 | Combination | Stage | What it enables |
